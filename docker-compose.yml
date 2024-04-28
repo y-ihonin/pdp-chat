@@ -1,0 +1,49 @@
+version: '3.9'
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    env_file: .env
+    volumes:
+      - ./frontend:/client
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    depends_on:
+      - backend
+    command: npm run start
+    networks:
+      - dev
+  backend:
+    container_name: backend
+    build: ./backend
+    restart: always
+    env_file: .env
+    volumes:
+      - ./backend:/server
+      - /server/node_modules
+    networks:
+      - dev
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    env_file: .env
+    volumes:
+      - mongoDB:/data/db
+    networks:
+      - dev
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis
+volumes:
+  backend:
+  mongoDB:
+networks:
+  dev:
+    driver: bridge
