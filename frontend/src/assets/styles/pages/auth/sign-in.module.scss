@@ -1,0 +1,11 @@
+.sign-in {
+  display: flex;
+  padding: 150px 0;
+
+  &__wrapper {
+    width: 100%;
+    border-radius: 8px;
+    padding: 32px;
+    background: var(--bg-main-color);
+  }
+}

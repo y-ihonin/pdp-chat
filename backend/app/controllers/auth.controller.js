@@ -17,8 +17,6 @@ exports.signup = (req, res) => {
 
   try {
     if (req.body.roles) {
-      console.log(req.body.roles)
-
       Role.find({ name: req.body.roles })
         .exec()
         .then(roles => {
@@ -43,57 +41,61 @@ exports.signup = (req, res) => {
   }
 };
 
-exports.signin = (req, res) => {
-  User.findOne({ username: req.body.username })
-    .populate("roles", "-__v")
-    .exec()
-    .then(user => {
-      if (!user) {
-        return res.status(404).send({ message: "User Not found." });
-      }
+exports.signIn = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username })
+      .populate("roles", "-__v")
+      .exec()
 
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
+    if (!user) {
+      return res.status(404).send({ message: "User Not found." });
+    }
 
-      if (!passwordIsValid) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Invalid Password!"
-        });
-      }
+    var passwordIsValid = bcrypt.compareSync(
+      req.body.password,
+      user.password
+    );
 
-      const token = jwt.sign(
-        {
-          id: user.id,
-          username: user.username,
-          email: user.email
-        },
-        config.secret,
-        {
-          algorithm: 'HS256',
-          allowInsecureKeySizes: true,
-          expiresIn: 86400, // 24 hours
-        }
-      );
-
-      var authorities = [];
-
-      for (let i = 0; i < user.roles.length; i++) {
-        authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
-      }
-
-      res.status(200).send({
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        roles: authorities,
-        accessToken: token
+    if (!passwordIsValid) {
+      return res.status(401).send({
+        accessToken: null,
+        message: "Invalid Password!"
       });
-    })
-    .catch(err => {
-      res.status(500).send({ message: err });
-      return;
-    })
+    }
+
+    const accessToken = jwt.sign(
+      {
+        id: user.id,
+        username: user.username,
+        email: user.email
+      },
+      config.secret,
+      {
+        algorithm: "HS256",
+        allowInsecureKeySizes: true,
+        expiresIn: 86400, // 24 hours
+      }
+    );
+
+    user.accessToken = accessToken;
+    await user.save();
+
+    var authorities = [];
+
+    for (let i = 0; i < user.roles.length; i++) {
+      authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
+    }
+
+    res.status(200).send({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: authorities,
+      accessToken: accessToken
+    });
+  } catch (error) {
+    console.log(error)
+
+    return res.status(500).send({ message: error });
+  }
 };

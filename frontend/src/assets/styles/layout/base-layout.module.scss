@@ -1,0 +1,13 @@
+.base-layout {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    background: var(--black-color);
+    height: 80px;
+  }
+
+  &__body {
+    flex: 1 1 0;
+  }
+}

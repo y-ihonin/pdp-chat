@@ -20,6 +20,9 @@
     "downlevelIteration": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "paths": {
+      "*": ["*"]
+    },
     "noFallthroughCasesInSwitch": true
   },
   "include": [

@@ -6,26 +6,32 @@ const db = require("../models/index.js");
 const User = db.user;
 const Role = db.role;
 
-verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+verifyToken = async  (req, res, next) => {
+  try {
+    const token = req.header("Authorization").replace("Bearer ", "");
+    const decoded = jwt.verify(token, config.secret); // Use your JWT secret key
 
-  if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
-  }
+    const user = await User.findOne({ _id: decoded.id });
 
-  jwt.verify(
-    token,
-    config.secret,
-    (err, decoded) => {
-      if (err) {
-        return res.status(401).send({
-          message: "Unauthorized!",
-        });
-      }
-      req.userId = decoded.id;
-      next();
+    if (!token) {
+      return res.status(403).send({ message: "Please authenticate!" });
     }
-  );
+
+    if (!user) {
+      return res.status(403).send({ message: "User not found!" });
+    }
+
+    req.token = token;
+    req.user = user;
+    next();
+
+  } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).send({ error: "Token expired", isTokenExpired: true });
+    }
+
+    res.status(401).send({ error: "Please authenticate." });
+  }
 };
 
 isAdmin = (req, res, next) => {

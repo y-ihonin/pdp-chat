@@ -1,0 +1,76 @@
+.label-error-provider {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+
+  &_label-placement-left {
+    display: grid;
+    align-items: center;
+    grid-column-gap: 16px;
+    grid-template-areas:
+      "label field"
+      "empty error";
+
+    .label-error-provider__info,
+    .label-error-provider__label {
+      grid-area: label;
+    }
+    .label-error-provider__error {
+      grid-area: error;
+    }
+  }
+
+  &__info,
+  &__error,
+  &__label {
+    // font-family: var(--main-font-family);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  &__label {
+    color: var(--text-main-color);
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    svg {
+      color: var(--text-main-color);
+    }
+  }
+
+  &__error {
+    color: var(--text-error-color);
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+  }
+
+  &__error-icon,
+  &__info-icon {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__info {
+    color: var(--text-main-color);
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+  }
+
+  &__disabled {
+    span {
+      color: var(--text-disable-color) !important;
+    }
+  }
+
+  :global {
+    .select-label {
+      margin: 0;
+    }
+  }
+}

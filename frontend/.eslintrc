@@ -10,13 +10,38 @@
     "@coax/eslint-config-fe-react"
   ],
   "rules": {
-    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "func-call-spacing": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-empty-function": "warn",
+    "func-call-spacing": "off",
     "no-useless-escape": "warn",
+    "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/camelcase": ["off"]
-  }
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { 
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      { 
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }

@@ -1,0 +1,215 @@
+.input-base-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  &__addon {
+    position: absolute;
+    z-index: 2;
+    color: var(--text-main-color);
+
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &_before {
+      left: 8px;
+    }
+    &_after {
+      right: 8px;
+    }
+    &_pointer-none {
+      pointer-events: none;
+    }
+  }
+
+  &__addon-clear {
+    cursor: pointer;
+  }
+
+  &:global(.ant-input) {
+    background: var(--white-color);
+    border: 1px solid var(--border-main-color);
+    box-shadow: 0px 1px 2px rgba(31, 41, 55, 0.08);
+    border-radius: 4px;
+
+    height: 36px;
+    width: 100%;
+    padding: 8px;
+
+    // font-family: var(--main-font-family);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-main-color);
+
+    transition: all 0.2s;
+
+    &:not([disabled]):hover {
+      border: 1px solid var(--border-disable-color);
+      box-shadow: 0px 0px 0px 3px rgb(229, 231, 235);
+    }
+
+    &:focus,
+    &:active {
+      border: 1px solid var(--text-main-color) !important;
+      box-shadow: 0px 0px 0px 3px rgb(231, 248, 247) !important;
+    }
+
+    &:disabled {
+      color: var(--text-disable-color);
+      background: var(--bg-main-color-50);
+    }
+  }
+
+  &:global(.ant-input.ant-input-status-error) {
+    border: 1px solid var(--text-error-color) !important;
+    box-shadow: 0px 0px 0px 3px rgb(255, 228, 230) !important;
+  }
+
+  &:global(.ant-input.ant-input-sm) {
+    padding: 4px 6px;
+    height: 28px;
+  }
+
+  &.input_width-addon-before {
+    padding-left: 36px;
+  }
+  &.input_width-addon-after {
+    padding-right: 32px;
+  }
+}
+
+.input-skeleton {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+
+  &__label {
+    // font-family: var(--main-font-family);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-main-color);
+    margin-bottom: 0;
+  }
+
+  &__field {
+    &:global(.ant-skeleton-element) {
+      width: 100%;
+
+      :global {
+        .ant-skeleton-input {
+          border-radius: 4px;
+          height: 36px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.locl-input-password {
+  &:global(.ant-input-affix-wrapper) {
+    background: var(--white-color-500);
+    border: 1px solid var(--bg-main-color);
+    box-shadow: 0px 1px 2px rgba(31, 41, 55, 0.08);
+    border-radius: 4px;
+
+    height: 36px;
+    width: 100%;
+    padding: 8px;
+
+    // font-family: var(--main-font-family);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-main-color);
+
+    transition: all 0.2s;
+
+    :global {
+      .ant-input-suffix {
+        cursor: pointer;
+
+        width: 20px;
+        height: 20px;
+        flex: 0 0 20px;
+
+        color: var(--text-main-color);
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  &:global(
+      .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(
+          .ant-input-affix-wrapper-borderless
+        ).ant-input-affix-wrapper
+    ) {
+    :global {
+      .ant-input-suffix {
+        color: var(--text-main-color);
+      }
+    }
+  }
+
+  &:global(.ant-input-affix-wrapper:not([disabled]):hover) {
+    border: 1px solid var(--border-disable-color);
+    box-shadow: 0px 0px 0px 3px rgb(229, 231, 235);
+  }
+
+  &:global(.ant-input-affix-wrapper-focused) {
+    border: 1px solid var(--border-hover-color) !important;
+    box-shadow: 0px 0px 0px 3px rgb(231, 248, 247) !important;
+  }
+
+  &:global(.ant-input-affix-wrapper-status-error) {
+    border: 1px solid var(--text-error-color) !important;
+    box-shadow: 0px 0px 0px 3px rgb(255, 228, 230) !important;
+  }
+}
+
+.locl-text-input {
+  &:global(.ant-input) {
+    // font-family: var(--main-font-family);
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      outline: none;
+      border: 1px solid var(--border-main-color);
+    }
+
+    &:focus {
+      border: 1px solid var(--border-hover-color);
+      box-shadow: 0px 0px 0px 3px rgb(231, 248, 247) !important;
+    }
+  }
+
+  &:global(.ant-input.ant-input-status-error) {
+    border: 1px solid var(--text-error-color) !important;
+    box-shadow: 0px 0px 0px 3px rgb(255, 228, 230) !important;
+  }
+}
