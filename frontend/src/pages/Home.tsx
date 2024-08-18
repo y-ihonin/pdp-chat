@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+// containers
+import UsersList from "src/containers/UsersList";
 
 // assets
 import "../assets/styles/pages/home.scss";
@@ -7,8 +8,7 @@ import "../assets/styles/pages/home.scss";
 function Home() {
   return (
     <div data-testid="home-page">
-      <h1>Home</h1>
-      <Link to="/sign-in">Sign in</Link>
+      <UsersList />
     </div>
   );
 }

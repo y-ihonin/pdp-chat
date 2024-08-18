@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  &__title {
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 400;
+  }
+
+  &__user-dropdown {
+    border: none;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+}

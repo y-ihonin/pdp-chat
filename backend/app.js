@@ -16,6 +16,7 @@ connectToDatabase();
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/account.routes")(app);
+require("./app/routes/conversion.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.BACKEND_PORT || 4000;

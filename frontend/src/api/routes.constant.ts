@@ -6,6 +6,12 @@ const API_ROUTES = {
   auth: {
     signIn: "/auth/sign-in",
     signUp: "/auth/sign-up",
+  },
+  users: {
+    usersList: "/users/list",
+  },
+  conversion: {
+    room: "/conversion/room",
   }
 }
 

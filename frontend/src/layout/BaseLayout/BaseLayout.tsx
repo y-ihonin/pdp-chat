@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 
+// containers
+import Header from "src/containers/Header";
+
 // assets
 import styles from "../../assets/styles/layout/base-layout.module.scss";
 
@@ -8,9 +11,7 @@ const BaseLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className={styles["base-layout"]}>
-      <header className={styles["base-layout__header"]}>
-        Header
-      </header>
+      <Header />
       <main className={styles["base-layout__body"]}>
         {children}
       </main>

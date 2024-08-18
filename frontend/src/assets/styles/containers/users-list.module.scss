@@ -1,0 +1,53 @@
+.users-list {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px;
+
+  width: 400px;
+
+  &__block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 8px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--bg-main-color);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
+    &__title {
+      font-size: 16px;
+      line-height: 1.5;
+      font-weight: 400;
+      color: var(--text-main-color);
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: row;
+      grid-gap: 8px;
+    }
+
+    &__create-room {
+      padding: 4px;
+      width: 40px;
+      height: 40px;
+      
+      &__icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  &__block-skeleton {
+    &:global(.ant-skeleton-element .ant-skeleton-input ),
+    &:global(.ant-skeleton-element) {
+      height: 60px !important;
+      min-width: 20px !important;
+      width: 100% !important;
+      border-radius: 0px;
+      border: 1px solid var(--border-main-color);
+    }
+  }
+}

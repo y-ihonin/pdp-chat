@@ -1,0 +1,13 @@
+.create-room-modal {}
+
+.create-room-modal-content {
+  display: flex;
+  width: 100%;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
+    width: 100%;
+  }
+}

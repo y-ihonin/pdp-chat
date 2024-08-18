@@ -20,7 +20,6 @@ exports.signup = (req, res) => {
       Role.find({ name: req.body.roles })
         .exec()
         .then(roles => {
-          console.log(roles)
           user.roles = roles.map(role => role._id);
           user.save();
         })
@@ -94,8 +93,6 @@ exports.signIn = async (req, res) => {
       accessToken: accessToken
     });
   } catch (error) {
-    console.log(error)
-
     return res.status(500).send({ message: error });
   }
 };

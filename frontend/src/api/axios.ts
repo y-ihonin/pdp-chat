@@ -23,4 +23,32 @@ axios.interceptors.request.use(
   }
 )
 
+// Handle errors
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    const status = error && error.response && error.response.status ? error.response.status : null;
+
+    switch (status) {
+      case 401:
+        if (error.response.request.responseURL.includes("/account/profile/me")) {
+          Cookies.remove("accessToken");
+
+          if (["/sign-in"].includes(window.location.pathname)) {
+            return;
+          }
+
+
+          window.location.href = "/sign-in";
+        }
+
+        return Promise.reject(error);
+      default:
+        return Promise.reject(error);
+    }
+  }
+);
+
 export default axios;

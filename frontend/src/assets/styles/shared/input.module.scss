@@ -50,7 +50,6 @@
     width: 100%;
     padding: 8px;
 
-    // font-family: var(--main-font-family);
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -72,7 +71,7 @@
 
     &:disabled {
       color: var(--text-disable-color);
-      background: var(--bg-main-color-50);
+      background: var(--border-disable-color);
     }
   }
 
@@ -100,7 +99,6 @@
   grid-gap: 8px;
 
   &__label {
-    // font-family: var(--main-font-family);
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -124,10 +122,10 @@
   }
 }
 
-.locl-input-password {
+.input-password {
   &:global(.ant-input-affix-wrapper) {
-    background: var(--white-color-500);
-    border: 1px solid var(--bg-main-color);
+    background: var(--white-color);
+    border: 1px solid var(--border-main-color);
     box-shadow: 0px 1px 2px rgba(31, 41, 55, 0.08);
     border-radius: 4px;
 
@@ -135,7 +133,6 @@
     width: 100%;
     padding: 8px;
 
-    // font-family: var(--main-font-family);
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -190,7 +187,7 @@
   }
 }
 
-.locl-text-input {
+.text-input {
   &:global(.ant-input) {
     // font-family: var(--main-font-family);
     border-radius: 4px;
