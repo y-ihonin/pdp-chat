@@ -61,3 +61,32 @@ exports.createRoom = async (req, res) => {
     res.status(500).json({ error: "Failed to create room" });
   }
 };
+
+exports.getRooms = async (req, res) => {
+  try {
+    // Create the new room
+    const userId = req.user?.id;
+
+    let rooms = [];
+
+    await Room.find({
+      participants: userId
+    })
+      .select("-messages")  // Exclude the messages field
+      .populate({
+        path: "participants",
+        select: "id username" // Select only the id and name fields
+      })
+      .then(items => {
+        rooms.push(...items);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+    res.status(200).json({ results: rooms });
+  } catch (error) {
+    console.error("Error creating room:", error);
+    res.status(500).json({ error: "Failed to create room" });
+  }
+};

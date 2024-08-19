@@ -87,7 +87,6 @@ const SignInForm = () => {
       <Button
         type="primary"
         htmlType="submit"
-        onClick={() => handleSubmit()}
       >
         Sing in
       </Button>

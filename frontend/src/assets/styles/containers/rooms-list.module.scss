@@ -1,0 +1,61 @@
+.rooms-list {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px;
+
+  width: 400px;
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--bg-main-color);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
+    &__title {
+      font-size: 16px;
+      line-height: 1.5;
+      font-weight: 400;
+      color: var(--text-main-color);
+    }
+
+    &__members {
+      display: flex;
+      grid-gap: 16px;
+
+      &__title {
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+      }
+
+      &__list {
+        display: flex;
+        grid-gap: 8px;
+        flex-wrap: wrap;
+      }
+    }
+
+    &__open-room {
+      width: 100%;
+
+      &__button {
+        width: 100%;
+      }
+    }
+  }
+
+
+  &__block-skeleton {
+    &:global(.ant-skeleton-element .ant-skeleton-input ),
+    &:global(.ant-skeleton-element) {
+      height: 60px !important;
+      min-width: 20px !important;
+      width: 100% !important;
+      border-radius: 0px;
+      border: 1px solid var(--border-main-color);
+    }
+  }
+}
