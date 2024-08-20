@@ -11,6 +11,8 @@ module.exports = function(app) {
   });
 
   app.get("/api/conversion/room/:id/messages", [authJwt.verifyToken], controller.getMessagesByRoomId);
+
+  app.get("/api/conversion/room/:id", [authJwt.verifyToken], controller.getSingleRoomById);
   
   app.post("/api/conversion/room", [authJwt.verifyToken], controller.createRoom);
 

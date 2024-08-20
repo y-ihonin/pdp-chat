@@ -13,6 +13,8 @@ const API_ROUTES = {
   conversion: {
     room: "/conversion/room",
     rooms: "/conversion/rooms",
+    roomMessages: "/conversion/room/:id/messages",
+    roomSingle: "/conversion/room/:id",
   }
 }
 

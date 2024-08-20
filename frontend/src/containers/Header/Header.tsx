@@ -51,9 +51,9 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      <div className={styles.header__title}>
+      <Link to="/" className={styles.header__title}>
         Web-Socket Chat
-      </div>
+      </Link>
       <div className={styles["header-user"]}>
         {renderUserBlock()}
       </div>

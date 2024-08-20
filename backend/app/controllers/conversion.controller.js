@@ -16,7 +16,12 @@ const getMessagesByRoomId = async (roomId) => {
       throw new Error("Room not found");
     }
 
-    return room.messages;
+    return room.messages.map(message => {
+      const messageObject = message.toObject();
+      messageObject.user = messageObject.userId;
+      delete messageObject.userId;
+      return messageObject;
+    });
   } catch (error) {
     console.error("Error fetching messages:", error);
     throw error;
@@ -88,5 +93,32 @@ exports.getRooms = async (req, res) => {
   } catch (error) {
     console.error("Error creating room:", error);
     res.status(500).json({ error: "Failed to create room" });
+  }
+};
+
+exports.getSingleRoomById = async (req, res) => {
+  const roomId = req.params.id;
+
+  try {
+    const userId = req.user?.id;
+
+    const room = await Room.findOne({
+      _id: roomId,
+      participants: userId
+    })
+      .select("-messages")
+      .populate({
+        path: "participants",
+        select: "id username"
+      });
+
+    if (!room) {
+      return res.status(404).json({ error: "Room not found" });
+    };
+
+    res.status(200).json(room);
+  }
+  catch (error) {
+    res.status(500).json({ error: "Failed to fetch room" });
   }
 };

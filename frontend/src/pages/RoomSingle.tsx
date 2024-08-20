@@ -1,18 +1,14 @@
 import { useParams } from "react-router-dom";
 
-// assets
-import "../assets/styles/pages/home.scss";
+// containers
+import MessageRoom from "src/containers/MessageRoom";
 
 
 function RoomSingle() {
   const { id } = useParams();
 
-  console.log("id", id)
-
   return (
-    <div>
-      RoomSingle
-    </div>
+    <MessageRoom roomId={id as string} />
   );
 }
 
