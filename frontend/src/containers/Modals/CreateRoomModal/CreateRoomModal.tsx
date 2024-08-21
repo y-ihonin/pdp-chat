@@ -1,8 +1,11 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 
 // components
 import Modal from "src/shared/Modal";
 const CreateRoomModalContent = React.lazy(() => import("./CreateRoomModalContent"));
+
+// helpers
+import useUserProfile from "src/hooks/useUserProfile";
 
 // interfaces
 import { ICreateRoomModal } from "./CreateRoomModal.interface";
@@ -18,6 +21,15 @@ const CreateRoomModal = (props: ICreateRoomModal) => {
     onSubmit,
     ...rest
   } = props;
+  const { data } = useUserProfile();
+
+  useEffect(() => {
+    if (open) {
+      const payload = new Blob([JSON.stringify({ userId: data?.id })], { type: "application/json" });
+      
+      navigator.sendBeacon(`${process.env.REACT_APP_APP_API_URL}/analytics/open-create-room-modal`, payload);
+    }
+  }, [open])
 
   return (
     <Modal

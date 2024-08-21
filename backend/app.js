@@ -4,7 +4,12 @@ const cors = require("cors")
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: `http://localhost:${process.env.FRONTEND_PORT || 3000}`,
+  methods: "*",
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,6 +22,7 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/account.routes")(app);
 require("./app/routes/conversion.routes")(app);
+require("./app/routes/analytics.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.BACKEND_PORT || 4000;
